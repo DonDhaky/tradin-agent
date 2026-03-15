@@ -1,0 +1,26 @@
+import type { Metadata } from "next";
+import { Manrope } from "next/font/google";
+
+import "./globals.css";
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-sans"
+});
+
+export const metadata: Metadata = {
+  title: "Tradein Agent",
+  description: "Collect and manage premium second-hand tech trade-in requests."
+};
+
+export default function RootLayout({
+  children
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className={manrope.variable}>{children}</body>
+    </html>
+  );
+}
