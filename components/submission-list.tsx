@@ -7,7 +7,7 @@ type SubmissionListProps = {
 
 export function SubmissionList({ submissions }: SubmissionListProps) {
   return (
-    <aside className="panel" style={{ padding: "28px", display: "grid", gap: "20px", align-content: "start" }}>
+    <aside className="panel" style={{ padding: "28px", display: "grid", gap: "20px", alignContent: "start" }}>
       <div style={{ display: "grid", gap: "10px" }}>
         <span className="eyebrow">Recent submissions</span>
         <div>

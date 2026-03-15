@@ -97,6 +97,8 @@ Required server values:
 - The client SDK handles login/signup in the browser.
 - The server verifies Firebase ID tokens using `firebase-admin`.
 - Product submissions are written through server-side Firestore helpers.
+- A `users/{uid}` profile document is ensured during auth session creation on both signup and login.
+- Existing user profiles keep their original `createdAt`; only `email`, `displayName`, and `updatedAt` are refreshed.
 - Never commit live Firebase credentials.
 
 ## Suggested Firestore Shape

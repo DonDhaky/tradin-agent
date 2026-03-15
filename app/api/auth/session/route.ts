@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 import { createSessionCookie, verifyIdToken } from "@/lib/firebase/admin";
+import { ensureUserProfile } from "@/lib/firestore/users";
 
 const SESSION_COOKIE_NAME = "tradein_session";
 const SESSION_DURATION_MS = 1000 * 60 * 60 * 24 * 5;
@@ -14,7 +15,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "Missing Firebase ID token." }, { status: 400 });
     }
 
-    await verifyIdToken(token);
+    const decodedToken = await verifyIdToken(token);
+    await ensureUserProfile(decodedToken);
     const sessionCookie = await createSessionCookie(token, SESSION_DURATION_MS);
 
     const cookieStore = await cookies();
