@@ -5,14 +5,7 @@ import { signOut } from "firebase/auth";
 
 import { auth } from "@/lib/firebase/client";
 
-type DashboardHeaderProps = {
-  user: {
-    email?: string | null;
-    name?: string | null;
-  };
-};
-
-export function DashboardHeader({ user }: DashboardHeaderProps) {
+export function DashboardHeader({ user }) {
   const router = useRouter();
 
   async function handleLogout() {

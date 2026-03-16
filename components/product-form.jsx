@@ -2,12 +2,12 @@
 
 import { useActionState, useEffect, useRef } from "react";
 
-import { ProductFormState, submitTradeInRequest } from "@/app/dashboard/actions";
+import { submitTradeInRequest } from "@/app/dashboard/actions";
 
-const initialState: ProductFormState = {};
+const initialState = {};
 
 export function ProductForm() {
-  const formRef = useRef<HTMLFormElement>(null);
+  const formRef = useRef(null);
   const [state, formAction, isPending] = useActionState(submitTradeInRequest, initialState);
 
   useEffect(() => {

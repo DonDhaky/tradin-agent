@@ -11,18 +11,14 @@ import {
 
 import { auth } from "@/lib/firebase/client";
 
-type AuthFormProps = {
-  mode: "login" | "signup";
-};
-
-export function AuthForm({ mode }: AuthFormProps) {
+export function AuthForm({ mode }) {
   const router = useRouter();
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
 
   const isSignup = mode === "signup";
 
-  async function handleSubmit(formData: FormData) {
+  async function handleSubmit(formData) {
     setError(null);
     setIsPending(true);
 

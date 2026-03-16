@@ -3,11 +3,7 @@ import { redirect } from "next/navigation";
 import { DashboardHeader } from "@/components/dashboard-header";
 import { getCurrentUser } from "@/lib/auth/session";
 
-export default async function DashboardLayout({
-  children
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default async function DashboardLayout({ children }) {
   const user = await getCurrentUser();
 
   if (!user) {

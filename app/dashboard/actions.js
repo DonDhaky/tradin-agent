@@ -5,17 +5,9 @@ import { revalidatePath } from "next/cache";
 import { getCurrentUser } from "@/lib/auth/session";
 import { createTradeInRequest } from "@/lib/firestore/trade-in-requests";
 
-export type ProductFormState = {
-  error?: string;
-  success?: string;
-};
+const requiredFields = ["category", "brand", "model", "condition"];
 
-const requiredFields = ["category", "brand", "model", "condition"] as const;
-
-export async function submitTradeInRequest(
-  _prevState: ProductFormState,
-  formData: FormData
-): Promise<ProductFormState> {
+export async function submitTradeInRequest(_prevState, formData) {
   const user = await getCurrentUser();
 
   if (!user) {

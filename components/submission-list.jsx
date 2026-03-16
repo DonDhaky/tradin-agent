@@ -1,11 +1,6 @@
-import { formatCurrency, formatDate } from "@/lib/utils";
-import type { TradeInRequest } from "@/types/trade-in-request";
+﻿import { formatCurrency, formatDate } from "@/lib/utils";
 
-type SubmissionListProps = {
-  submissions: TradeInRequest[];
-};
-
-export function SubmissionList({ submissions }: SubmissionListProps) {
+export function SubmissionList({ submissions }) {
   return (
     <aside className="panel" style={{ padding: "28px", display: "grid", gap: "20px", alignContent: "start" }}>
       <div style={{ display: "grid", gap: "10px" }}>
@@ -13,7 +8,7 @@ export function SubmissionList({ submissions }: SubmissionListProps) {
         <div>
           <h2 style={{ margin: 0, fontSize: "1.9rem", letterSpacing: "-0.04em" }}>Saved requests</h2>
           <p style={{ margin: "10px 0 0", color: "var(--muted)", lineHeight: 1.7 }}>
-            A lightweight Firestore view of the customer’s most recent product intake submissions.
+            A lightweight Firestore view of the customer's most recent product intake submissions.
           </p>
         </div>
       </div>
