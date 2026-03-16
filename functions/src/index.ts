@@ -131,3 +131,17 @@ export const onTradeInRequestCreated = onDocumentCreated("tradeInRequests/{reque
     logger.error("Failed to trigger n8n workflow", { requestId, error: message });
   }
 });
+
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
