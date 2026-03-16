@@ -129,3 +129,69 @@ Example document fields:
 - Add richer request status tracking
 
 Keep those additions behind new modules instead of overloading the V1 intake flow.
+
+## V1.5 Automation Trigger (Firestore -> n8n)
+
+This repository now includes a minimal Firebase Cloud Function trigger under `functions/`.
+
+Flow:
+
+- A document is created in `tradeInRequests/{requestId}`.
+- Cloud Function `onTradeInRequestCreated` sends a POST webhook to n8n.
+- On success, request document is updated with:
+  - `workflowStatus = "processing"`
+  - `estimationVersion = "v1.5-demo"`
+  - `estimationUpdatedAt`
+- On failure, request document is updated with:
+  - `workflowStatus = "failed"`
+  - `workflowError` (short sanitized message)
+  - `estimationVersion = "v1.5-demo"`
+  - `estimationUpdatedAt`
+
+### Functions Environment Variables
+
+Set in the Functions runtime environment (for emulator and deploy):
+
+- `N8N_WEBHOOK_URL`
+
+For local emulation, create `functions/.env.local`:
+
+```bash
+N8N_WEBHOOK_URL=https://your-n8n-instance/webhook/tradein-created
+```
+
+### Local Setup for Functions
+
+1. Install Firebase CLI (if needed):
+
+   ```bash
+   npm install -g firebase-tools
+   ```
+
+2. Install functions dependencies:
+
+   ```bash
+   cd functions
+   npm install
+   cd ..
+   ```
+
+3. Log in and select project:
+
+   ```bash
+   firebase login
+   firebase use <your-project-id>
+   ```
+
+4. Run emulator:
+
+   ```bash
+   firebase emulators:start --only functions,firestore
+   ```
+
+### Deploy Functions
+
+```bash
+firebase deploy --only functions
+```
+
