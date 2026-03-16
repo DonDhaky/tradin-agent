@@ -2,6 +2,7 @@ import { initializeApp } from "firebase-admin/app";
 import { FieldValue, Timestamp } from "firebase-admin/firestore";
 import { logger } from "firebase-functions";
 import { onDocumentCreated } from "firebase-functions/v2/firestore";
+const { defineSecret } = require('firebase-functions/params');
 
 initializeApp();
 
@@ -9,7 +10,8 @@ const EVENT_TYPE = "trade_in_request.created";
 const EVENT_VERSION = "1.0";
 const ESTIMATION_VERSION = "v1.5-demo";
 const FALLBACK_WEBHOOK_SIGNAL = "accepted";
-const N8N_WEBHOOK_URL = process.env.N8N_WEBHOOK_URL;
+const N8N_WEBHOOK_URL = defineSecret("N8N_WEBHOOK_URL");
+
 
 function getRequiredEnv(name: string): string {
   const value = process.env[name];
@@ -201,7 +203,7 @@ export const onTradeInRequestCreated = onDocumentCreated("tradeInRequests/{reque
   }
 
   try {
-    const webhookUrl = getRequiredEnv("N8N_WEBHOOK_URL");
+    const webhookUrl = N8N_WEBHOOK_URL.value();
 
     const response = await fetch(webhookUrl, {
       method: "POST",
